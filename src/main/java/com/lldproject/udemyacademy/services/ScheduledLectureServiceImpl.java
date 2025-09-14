@@ -15,7 +15,6 @@ import com.lldproject.udemyacademy.repositories.BatchRepository;
 import com.lldproject.udemyacademy.repositories.InstructorRepository;
 import com.lldproject.udemyacademy.repositories.LectureRepository;
 import com.lldproject.udemyacademy.repositories.ScheduledLectureRepository;
-import com.lldproject.udemyacademy.utils.utils;
 
 @Service
 public class ScheduledLectureServiceImpl implements ScheduledLectureService{
