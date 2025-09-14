@@ -1,10 +1,9 @@
 package com.lldproject.udemyacademy.utils;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 import com.lldproject.udemyacademy.models.Schedule;
+import com.lldproject.udemyacademy.models.ScheduledLecture;
 
 public class DronaUtils {
 
@@ -64,5 +63,24 @@ public class DronaUtils {
         calendar.add(Calendar.HOUR, 2);
         calendar.add(Calendar.MINUTE, 30);
         return calendar.getTime();
+    }
+
+    public static List<ScheduledLecture> recheduleLectures(List<ScheduledLecture> futureScheduledLectures) {
+        List<ScheduledLecture> rescheduledLectures = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        for(ScheduledLecture lecture: futureScheduledLectures){
+            calendar.setTime(lecture.getLectureStartTime());
+            if(calendar.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY || calendar.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
+                calendar.add(Calendar.DAY_OF_WEEK,3);
+            }
+            else{
+                calendar.add(Calendar.DAY_OF_WEEK, 2);
+            }
+            lecture.setLectureStartTime(calendar.getTime());
+            calendar.add(Calendar.MINUTE, 150);
+            lecture.setLectureEndTime(calendar.getTime());
+            rescheduledLectures.add(lecture);
+        }
+        return rescheduledLectures;
     }
 }

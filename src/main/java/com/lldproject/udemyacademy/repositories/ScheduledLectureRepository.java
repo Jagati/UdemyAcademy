@@ -1,5 +1,7 @@
 package com.lldproject.udemyacademy.repositories;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +15,5 @@ import com.lldproject.udemyacademy.models.ScheduledLecture;
 public interface ScheduledLectureRepository extends JpaRepository<ScheduledLecture, Long>{
     @Query("SELECT sl FROM ScheduledLecture sl WHERE sl.batch.id = :batchId ORDER BY sl.lectureEndTime DESC LIMIT 1")
     Optional<ScheduledLecture> findTopByBatch_IdOrderByLectureEndTimeDesc(@Param("batchId")long batchId);
+    List<ScheduledLecture> findByLectureStartTimeAfter(Date cancelledLectureDate);
 }
