@@ -83,4 +83,24 @@ public class DronaUtils {
         }
         return rescheduledLectures;
     }
+
+    public static List<ScheduledLecture> selectScheduledLecturesOnAndAfterStartDate(Date startDate, List<ScheduledLecture> scheduledLecturesForCurrentBatch) {
+        List<ScheduledLecture> filteredLectures = new ArrayList<>();
+        for(ScheduledLecture lecture: scheduledLecturesForCurrentBatch){
+            if(lecture.getLectureStartTime().compareTo(startDate)>=0){
+                filteredLectures.add(lecture);
+            }
+        }
+        return filteredLectures;
+    }
+
+    public static List<ScheduledLecture> selectScheduledLecturesBetweenStartDateAndEndDate(Date startDate, Date endDate, List<ScheduledLecture> scheduledLecturesForPastBatch) {
+        List<ScheduledLecture> filteredLectures = new ArrayList<>();
+        for(ScheduledLecture lecture: scheduledLecturesForPastBatch){
+            if(lecture.getLectureStartTime().compareTo(startDate)>=0 && lecture.getLectureEndTime().compareTo(endDate)<0){
+                filteredLectures.add(lecture);
+            }
+        }
+        return filteredLectures;
+    }
 }
